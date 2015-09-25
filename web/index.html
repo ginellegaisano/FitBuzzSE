@@ -1,0 +1,40 @@
+<!doctype html>
+<html ng-app="fitBuzz">
+  <head>
+  <script src="node_modules/angular/angular.js"> </script> <!-- switch to min.js for prod -->
+  <script src="node_modules/jquery/dist/jquery.js"> </script> <!-- switch to min.js for prod -->
+  <script src="node_modules/underscore/underscore.js"> </script> <!-- switch to min.js for prod -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.js"> </script> <!-- switch to min.js for prod -->
+  <script src="node_modules/d3/d3.min.js"> </script> <!-- switch to min.js for prod -->
+  <script src="packages/d3-timeline/src/d3-timeline.js"> </script> <!-- switch to min.js for prod -->
+  <script src="main.js"></script>
+  <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  </head>
+  <body>
+    <div id="title-bar">
+    <h1>FitBuzz!</h1>
+    </div>
+    <div id="container">
+      <div id="personal-greeting">
+        <strong>Hello, {{ yourName }}!</strong>
+      </div>
+
+      Select your sleep schedule:
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          {{currentSchedule}}
+          <span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+          <li ng-repeat="schedule in schedules" > <a ng-click="selectSchedule(schedule)">{{schedule}}</a></li>
+        </ul>
+      </div>
+      <h2>{{currentSchedule}}</h2>
+      <div class="timeline-container">
+        <div id="timeline1"></div>
+      </div>
+    </div>
+  </body>
+</html>

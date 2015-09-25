@@ -1,0 +1,34 @@
+/* Stylesheet for FitBuzz index page */
+
+/* let the base unit for all margins be 4px. */
+/* let all css declarations be alphabetized. */
+
+h1 {
+    margin: 0px;
+}
+
+/* classes */
+.timeline-container {
+    overflow: auto;
+    width: 750px;
+}
+
+#title-bar {
+    background-color: cornflowerblue;
+    color: white;
+    left: 0;
+    padding: 24px 0 24px 24px;
+    /*position: absolute;*/
+    top: 0;
+    width: 100%;
+}
+
+
+/* ids */
+#container {
+    margin: 0 24px;
+}
+
+#personal-greeting {
+    margin: 8px 0;
+}
