@@ -22,7 +22,7 @@ function convertTimeToMilliseconds (time, convertToType) {
             return time * 1000;
             break;
         default:
-            // TODO(ggaisano): add real error handling
+            // TODO(ginellegaisano): add real error handling
             return -1;
             console.log('Invalid type');
             break;

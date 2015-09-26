@@ -14,8 +14,9 @@ h1 {
 }
 
 #title-bar {
-    background-color: cornflowerblue;
+    background-color: #4C5363;
     color: white;
+    font-size: 24px;
     left: 0;
     padding: 24px 0 24px 24px;
     /*position: absolute;*/
@@ -23,8 +24,17 @@ h1 {
     width: 100%;
 }
 
+#title-letter {
+    color: #FFB300;
+    font-size: 42px;
+}
+
 
 /* ids */
+#colorF {
+    color: #FFB300;
+}
+
 #container {
     margin: 0 24px;
 }
