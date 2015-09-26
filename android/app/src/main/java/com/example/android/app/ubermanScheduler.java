@@ -1,9 +1,14 @@
 package com.example.android.app;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TimePicker;
 
 import com.example.android.app.R;
 
@@ -13,6 +18,8 @@ public class ubermanScheduler extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uberman_scheduler);
+
+        TimePicker timePicker1 = (TimePicker) findViewById(R.id.timePicker);
     }
 
 
@@ -35,5 +42,4 @@ public class ubermanScheduler extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

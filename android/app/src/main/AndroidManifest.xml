@@ -25,7 +25,7 @@
                 android:value="com.example.android.app.sleepChooserListActivity" />
         </activity>
         <activity
-            android:name="com.example.android.app.ubermanScheduler"
+            android:name=".ubermanScheduler"
             android:label="@string/title_activity_uberman_scheduler" >
         </activity>
         <activity

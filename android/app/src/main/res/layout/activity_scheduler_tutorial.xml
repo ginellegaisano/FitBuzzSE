@@ -24,7 +24,7 @@
         android:textColor="#ffffff"
         android:text="I got it!"
         android:onClick="finishTutorial"
-        android:layout_below="@id/description"
-        android:gravity="center"/>
+        android:layout_below="@+id/description"
+        android:gravity="center" />
 
 </RelativeLayout>
