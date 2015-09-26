@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.app.dummy.DummyContent;
+import com.example.android.app.sleepSchedules.Schedules;
 
 /**
  * A fragment representing a single sleepChooser detail screen.
@@ -25,7 +25,7 @@ public class sleepChooserDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private Schedules.ScheduleType mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -42,7 +42,7 @@ public class sleepChooserDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = Schedules.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
         }
     }
 

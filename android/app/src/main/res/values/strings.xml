@@ -3,5 +3,17 @@
 
     <string name="app_name">android</string>
     <string name="title_sleepchooser_detail">sleepChooser Detail</string>
+    <string name="title_activity_scheduler_tutorial">schedulerTutorial</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="uberman_tutorial_content">The Uberman schedule looks something like...</string>
+    <string name="everyman_tutorial_content">Everyman is like...</string>
+    <string name="finish_tutorial_button">I got it!</string>
+    <string name="title_activity_uberman_scheduler">ubermanScheduler</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_tutorial">tutorial</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 
 </resources>

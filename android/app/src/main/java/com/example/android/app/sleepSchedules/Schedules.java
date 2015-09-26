@@ -1,4 +1,4 @@
-package com.example.android.app.dummy;
+package com.example.android.app.sleepSchedules;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,26 +11,26 @@ import java.util.Map;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class DummyContent {
+public class Schedules {
 
     /**
      * An array of sample (dummy) items.
      */
-    public static List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static List<ScheduleType> ITEMS = new ArrayList<ScheduleType>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static Map<String, ScheduleType> ITEM_MAP = new HashMap<String, ScheduleType>();
 
     static {
         // Add 3 sample items.
-        addItem(new DummyItem("1", "Item 1"));
-        addItem(new DummyItem("2", "Item 2"));
-        addItem(new DummyItem("3", "Item 3"));
+        addItem(new ScheduleType("1", "Uberman"));
+        addItem(new ScheduleType("2", "Everyman"));
+        addItem(new ScheduleType("3", "Custom"));
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(ScheduleType item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
@@ -38,11 +38,11 @@ public class DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem {
+    public static class ScheduleType {
         public String id;
         public String content;
 
-        public DummyItem(String id, String content) {
+        public ScheduleType(String id, String content) {
             this.id = id;
             this.content = content;
         }

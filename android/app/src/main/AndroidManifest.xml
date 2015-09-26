@@ -24,6 +24,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.app.sleepChooserListActivity" />
         </activity>
+        <activity
+            android:name="com.example.android.app.ubermanScheduler"
+            android:label="@string/title_activity_uberman_scheduler" >
+        </activity>
+        <activity
+            android:name="com.example.android.app.schedulerTutorial"
+            android:label="@string/title_activity_scheduler_tutorial" >
+        </activity>
     </application>
 
 </manifest>

@@ -71,11 +71,9 @@ public class sleepChooserListActivity extends FragmentActivity
                     .commit();
 
         } else {
-            // In single-pane mode, simply start the detail activity
-            // for the selected item ID.
-            Intent detailIntent = new Intent(this, sleepChooserDetailActivity.class);
-            detailIntent.putExtra(sleepChooserDetailFragment.ARG_ITEM_ID, id);
-            startActivity(detailIntent);
+            Intent schedulerTutorial = new Intent(this, schedulerTutorial.class);
+            schedulerTutorial.putExtra(sleepChooserDetailFragment.ARG_ITEM_ID, id);
+            startActivity(schedulerTutorial);
         }
     }
 }
