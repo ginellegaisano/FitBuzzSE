@@ -7,24 +7,54 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.android.app.schedulerTutorial"
+    android:orientation="vertical"
     android:background="#4C5363">
+
+    <TextView android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:keepScreenOn="true"
+        android:textColor="#FFB300"
+        android:textSize="25sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
     <TextView android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:keepScreenOn="true"
         android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:gravity="center" />
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/title"
+        android:background="@drawable/textview_design"
+        android:padding="10dp"
+        />
 
-    <Button android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:text="I got it!"
-        android:onClick="finishTutorial"
-        android:layout_below="@+id/description"
-        android:gravity="center" />
+        android:src="@drawable/uberman"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/description"
+        />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFB300"
+            android:text="I got it!"
+            android:onClick="finishTutorial"
+            android:layout_below="@+id/picture"
+            android:gravity="center"
+            />
+    </FrameLayout>
 
 </RelativeLayout>

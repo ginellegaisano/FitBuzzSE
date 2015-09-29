@@ -17,14 +17,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.android.app.sleepChooserDetailActivity"
-            android:label="@string/title_sleepchooser_detail"
-            android:parentActivityName="com.example.android.app.sleepChooserListActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.app.sleepChooserListActivity" />
-        </activity>
-        <activity
             android:name=".ubermanScheduler"
             android:label="@string/title_activity_uberman_scheduler" >
         </activity>

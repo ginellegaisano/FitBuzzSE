@@ -22,6 +22,10 @@ public class ubermanScheduler extends Activity {
         TimePicker timePicker1 = (TimePicker) findViewById(R.id.timePicker);
     }
 
+    public void calculateSleepTimes() {
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
