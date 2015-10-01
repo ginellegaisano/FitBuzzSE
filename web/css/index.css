@@ -7,6 +7,10 @@ h1 {
     margin: 0px;
 }
 
+a {
+    color: #4C5363;
+}
+
 /* classes */
 .dropdown {
     display: inline;
@@ -28,6 +32,26 @@ h1 {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
+}
+
+.plot-title {
+    font-size: 20px;
+    padding: 20px 20px 20px 20px;  
+}
+
+.datepicker-container {
+    background-color: #4C5363;
+    color: white;
+    font-size: 14px;
+    left: 0;
+    padding: 10px 10px 10px 10px;
+    top: 0;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#datepicker {
+    color: #4C5363;
 }
 
 #next-button {

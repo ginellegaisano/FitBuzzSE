@@ -8,6 +8,8 @@
   <script src="node_modules/d3/d3.min.js"> </script> <!-- switch to min.js for prod -->
   <script src="packages/d3-timeline/src/d3-timeline.js"> </script> <!-- switch to min.js for prod -->
   <script src="packages/timepicker/jquery.timepicker.js"> </script> <!-- switch to min.js for prod -->
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script> <!-- Load jQuery JS -->
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> <!-- Load jQuery UI Main JS  -->
   <script src="js/const/const.js"> </script>
   <script src="js/common/common.js"> </script>
   <script src="js/src/schedule_calculation.js"> </script>
@@ -15,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="packages/timepicker/jquery.timepicker.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   </head>
 
   <body>
@@ -26,5 +29,10 @@
       <li role="presentation"><a href="index.html">Sleep Schedule</a></li>
       <li role="presentation" class="active"><a href="analytics.html">Analytics</a></li>
     </ul>
+
+    <div class="plot-title">
+    <div class="datepicker-container">View Metrics for Date <input type="text" id="datepicker" /></div>
+      Heart Rate Metrics
+    </div>
   </body>
 </html>
