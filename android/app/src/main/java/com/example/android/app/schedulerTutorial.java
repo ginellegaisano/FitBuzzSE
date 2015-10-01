@@ -17,9 +17,11 @@ public class schedulerTutorial extends Activity {
 
         int scheduleType = 1;
         TextView descriptionView = (TextView) findViewById(R.id.description);
+        TextView titleView = (TextView) findViewById(R.id.title);
 
         switch(scheduleType) {
             case 1:
+                titleView.setText(getResources().getString(R.string.uberman_tutorial_title));
                 descriptionView.setText(getResources().getString(R.string.uberman_tutorial_content));
                 break;
             case 2:

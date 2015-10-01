@@ -5,7 +5,8 @@
     <string name="title_sleepchooser_detail">sleepChooser Detail</string>
     <string name="title_activity_scheduler_tutorial">schedulerTutorial</string>
     <string name="dummy_button">Dummy Button</string>
-    <string name="uberman_tutorial_content">The Uberman schedule looks something like...</string>
+    <string name="uberman_tutorial_title">What\'s uberman?</string>
+    <string name="uberman_tutorial_content">You take 20 minute naps every 4 hours. For the rest of your life.</string>
     <string name="everyman_tutorial_content">Everyman is like...</string>
     <string name="finish_tutorial_button">I got it!</string>
     <string name="title_activity_uberman_scheduler">ubermanScheduler</string>
