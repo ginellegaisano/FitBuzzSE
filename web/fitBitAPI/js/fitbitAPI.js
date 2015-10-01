@@ -9,12 +9,14 @@
 function setup(){
     var client_id = "229W6K";
     var encoded_user_name = "MjI5VzZLOmU0MWU0NWU5MGE0YzUzZTEyNDc0NzljOWUwNzM4N2Fm="
+    var refresh_token = "f90a3482e393666e631f0110fee382ac576703cfae08dcf8b8d934e03253626c";
     var access_token;
     var redirect_url = "http%3A%2F%2Flocalhost%3A63342%2FFitBuzzSE%2Fweb%2FfitBitAPI%2Fmain.html";
     var tracking_id;
     var devices_ret_data;
     var alarm_ret_data;
-    var has_alarms;
+    var sleep_ret_data;
+    var has_alarms = true;
     var ajaxGETCall = function (url, type, authorization,onSuccess, onError, onComplete){
         $.ajax({
             url: url,
@@ -59,7 +61,6 @@ function setup(){
         })
     }
     var getDevices = function(){
-        console.log("test");
         url =  "https://api.fitbit.com/1/user/-/devices.json";
         type= "GET";
         authorization = "Bearer " + access_token;
@@ -88,9 +89,9 @@ function setup(){
         authorization = "Bearer " + access_token;
         onSuccess= function(data){
             console.log("getting alarms");
-            alarm_ret_data = data;
-            console.log();;
-            if(data.trackerAlarms.length){
+            alarm_ret_data = data.trackerAlarms;
+            console.log(data);
+            if(data.trackerAlarms.length < 1){
                 console.log("new Alarms!!");
                 has_alarms = false;
             }
@@ -114,6 +115,7 @@ function setup(){
         getAccessCode :  function(){
             code = window.location.search.substring(6)
             data = "client_id=229W6K&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A63342%2FFitBuzzSE%2Fweb%2FfitBitAPI%2Fmain.html&code="+ code;
+            //data = "client_id=229W6K&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A63342%2FFitBuzzSE%2Fweb%2FfitBitAPI%2Fmain.html&code="+ code;
             url= "https://api.fitbit.com/oauth2/token"
             type= "POST"
             data= data
@@ -121,6 +123,7 @@ function setup(){
             success= function (data) {
                 access_token = data.access_token;
                 console.log("access_code obtained");
+                console.log(data.refresh_token);
                 //localstorage.setItem('response', Json.stringify(data));
             }
             error= function (jqXHR, textStatus, errorThrown) {
@@ -133,7 +136,6 @@ function setup(){
             ajaxPOSTCall(url,type,data,authorization,success,error,complete)
         },
 
-
         setAlarm: function(time, day){
             //var a = new Date(timestamp*1000);
             //var days = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
@@ -141,7 +143,8 @@ function setup(){
 
             var array = [day];
             if(has_alarms){
-                var url = "https://api.fitbit.com/1/user/-/devices/tracker/"+device_ret_data[0].id + "/alarms/" + alarm_ret_data[0].id + ".json"
+                console.log("has Alarms");
+                var url = "https://api.fitbit.com/1/user/-/devices/tracker/"+device_ret_data[0].id + "/alarms/" + alarm_ret_data[0].alarmId + ".json"
                 data = {time: time + '-04:00',
                     enabled:"true",
                     recurring:"false",
@@ -151,6 +154,7 @@ function setup(){
                     label: "FitBuzz Alarm!"
                 }
             }else{
+                console.log("new Alarms");
                 var url = 'https://api.fitbit.com/1/user/-/devices/tracker/'+ device_ret_data[0].id + '/alarms.json'
                 data = {time: time + '-04:00',
                     enabled:"true",
@@ -165,9 +169,7 @@ function setup(){
                 alarm_ret_data = data;
             }
             error= function (jqXHR, textStatus, errorThrown) {
-                    console.log("yrdy")
-                    console.log(textStatus);
-                    console.log(errorThrown);
+                    console.log(jqXHR)
             }
             complete  = function(){
 
@@ -175,6 +177,31 @@ function setup(){
             ajaxPOSTCall(url,type,data,authorization,success,error,complete)
 
         },
+
+        //has to be in yyyy-MM-dd time. 
+        getSleep: function(date){
+            url= "https://api.fitbit.com/1/user/-/sleep/date/" + date+ ".json";
+            type = "GET";
+            authorization = "Bearer " + access_token;
+            onSuccess = function(data){
+                console.log("Got a sleeps schedule");
+                console.log(data);
+                sleep_ret_data = data;
+            }
+            onError= function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR)
+            }
+            onComplete = function(){
+            }
+
+            ajaxGetCall(url, type, authorization, onSuccess, onError, onComplete);
+        },
+        getAlarms: function(){
+            return alarm_ret_data;
+        },
+        getDevices: function(){
+            return devices_ret_data;
+        }
     })
     return {
         fitbitAPI: fitbitAPI,
