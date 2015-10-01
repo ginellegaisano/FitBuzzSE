@@ -7,31 +7,51 @@ h1 {
     margin: 0px;
 }
 
+a {
+    color: #4C5363;
+}
+
 /* classes */
 .dropdown {
     display: inline;
     margin-right: 24px;
 }
 
-#next-button {
-    display: inline;
-    margin-left: 24px;
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
 
-#next-button-inner {
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.plot-title {
+    font-size: 20px;
+    padding: 20px 20px 20px 20px;
+}
+
+.datepicker-container {
     background-color: #4C5363;
-    border-color: #4C5363;
-    padding: 4px 8px;
+    color: white;
+    font-size: 14px;
+    left: 0;
+    padding: 10px 10px 10px 10px;
+    top: 0;
+    width: 100%;
+    border-radius: 10px;
 }
 
-#next-button-inner:hover {
-    background-color: #2B3849;
-    border-color: #2B3849;
-}
-
-#next-button-inner:active {
-    background-color: #1B2839;
-    border-color: #1B2839;
+#datepicker {
+    color: #4C5363;
 }
 
 .timeline-container {
@@ -53,6 +73,9 @@ h1 {
     font-size: 42px;
 }
 
+.start-time {
+    margin:12px 0;
+}
 
 /* ids */
 #colorF {

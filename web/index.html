@@ -6,21 +6,27 @@
   <script src="node_modules/underscore/underscore.js"> </script> <!-- switch to min.js for prod -->
   <script src="node_modules/bootstrap/dist/js/bootstrap.js"> </script> <!-- switch to min.js for prod -->
   <script src="node_modules/d3/d3.min.js"> </script> <!-- switch to min.js for prod -->
-  <script src="packages/d3-timeline/src/d3-timeline.js"> </script> <!-- switch to min.js for prod -->
+  <script src="node_modules/vis/dist/vis.js"> </script> <!-- switch to min.js for prod -->
   <script src="packages/timepicker/jquery.timepicker.js"> </script> <!-- switch to min.js for prod -->
   <script src="js/const/const.js"> </script>
   <script src="js/common/common.js"> </script>
   <script src="js/src/schedule_calculation.js"> </script>
   <script src="main.js"></script>
   <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/vis/dist/vis.css">
   <link rel="stylesheet" type="text/css" href="packages/timepicker/jquery.timepicker.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
   </head>
+
   <body>
     <div id="title-bar">
     <!-- TODO(ginellegaisano): swap out with logo -->
     <strong id="title-letter">F</strong>itBuzz!
     </div>
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a href="index.html">Sleep Schedule</a></li>
+      <li role="presentation"><a href="analytics.html">Analytics</a></li>
+    </ul>
     <div id="container">
       <div id="personal-greeting">
         <strong>Hello, {{ yourName }}!</strong>
@@ -37,22 +43,13 @@
           <li ng-repeat="schedule in schedules" > <a ng-click="selectSchedule(schedule)">{{schedule}}</a></li>
         </ul>
       </div>
-      <div id="next-button">
-        <a id="next-button-inner" href="#" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-arrow-right"></span>
-        </a>
-      </div>
-      <h2>{{currentSchedule}}</h2>
-      <div class="timeline-container">
-        <div id="timeline1"></div>
-      </div>
-
       <div class="start-time">
         Select start time:
         <input type="text" id="timepicker1" class="timepicker" name="time" ng-model="initalTime"/>
       </div>
+      <h2>{{currentSchedule}}</h2>
       <div class="timeline-container">
-        <div id="timeline2"></div>
+        <div id="timeline"></div>
       </div>
     </div>
   </body>
