@@ -1,12 +1,20 @@
+/*
+Plot Generator Module:
+  Plots various metrics (ie. heartrate) tracked by the FitBit.
 
-var app = angular.module('fitBuzz', []);
+  TODO: pull real data
+*/
 
 function getHeartRates() {
-  var data = [{date: "1-May-15", close: 480}, {date: "3-May-15", close: 550}, {date: "5-May-15", close: 430}];;
+  var data = [{date: "1-May-15", close: 480}, {date: "3-May-15", close: 550}, {date: "5-May-15", close: 430}];
   return data;
 }
 
 function generateHeartRatePlot() {
+  $( "#datepicker" ).datepicker({
+      changeMonth: true,//this option for allowing user to select month
+      changeYear: true //this option for allowing user to select from year range
+    });
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -31,7 +39,7 @@ function generateHeartRatePlot() {
       .x(function(d) { return x(d.date); })
       .y(function(d) { return y(d.close); });
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("#metrics-graph").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -71,11 +79,17 @@ function generateSleepPlot() {
 
 }
 
-app.run(function($rootScope) {
-   $( "#datepicker" ).datepicker({
-      changeMonth: true,//this option for allowing user to select month
-      changeYear: true //this option for allowing user to select from year range
-    });
+var plotGeneratorModule = angular.module('plotGeneratorModule', []);
 
-  generateHeartRatePlot();
+plotGeneratorModule.directive('plotGenerator', function() {
+  return {
+      restrict: 'AE',
+      replace: 'true',
+      templateUrl: 'js/components/plot-generator.html',
+  };
 });
+
+plotGeneratorModule.controller('plotGeneratorController', ['$scope', function($scope) {
+   generateHeartRatePlot();
+}]);
+

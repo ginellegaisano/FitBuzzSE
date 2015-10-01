@@ -1,0 +1,21 @@
+<div ng-controller="SchedulerPickerController">
+  Select your sleep schedule:
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      {{currentSchedule}}
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+      <li ng-repeat="schedule in schedules" > <a ng-click="selectSchedule(schedule)">{{schedule}}</a></li>
+    </ul>
+  </div>
+  <div class="start-time">
+    Select start time:
+    <input type="text" id="timepicker1" class="timepicker" name="time" ng-model="initalTime"/>
+  </div>
+  <h2>{{currentSchedule}}</h2>
+  <div class="timeline-container">
+    <div id="timeline"></div>
+  </div>
+</div>

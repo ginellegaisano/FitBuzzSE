@@ -1,8 +1,15 @@
 <!doctype html>
-<html ng-app="fitBuzz">
+<html ng-app="fitBuzz" ng-controller="FitBuzzController">
   <head>
+  <!-- TODO(ginellegaisano): Look into cleaning this up-->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <!-- TODO(ginellegaisano): sort out issue with conflicting jQuery inclusion-->
+  <!-- <script src="node_modules/jquery/dist/jquery.js"> </script> -->
+
+
   <script src="node_modules/angular/angular.js"> </script> <!-- switch to min.js for prod -->
-  <script src="node_modules/jquery/dist/jquery.js"> </script> <!-- switch to min.js for prod -->
   <script src="node_modules/underscore/underscore.js"> </script> <!-- switch to min.js for prod -->
   <script src="node_modules/bootstrap/dist/js/bootstrap.js"> </script> <!-- switch to min.js for prod -->
   <script src="node_modules/d3/d3.min.js"> </script> <!-- switch to min.js for prod -->
@@ -12,10 +19,16 @@
   <script src="js/common/common.js"> </script>
   <script src="js/src/schedule_calculation.js"> </script>
   <script src="main.js"></script>
+
+  <script src="js/components/scheduler-picker.js"></script>
+  <script src="js/components/plot-generator.js"></script>
+
   <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="node_modules/vis/dist/vis.css">
   <link rel="stylesheet" type="text/css" href="packages/timepicker/jquery.timepicker.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="js/components/scheduler-picker.css">
+  <link rel="stylesheet" type="text/css" href="js/components/plot-generator.css">
   </head>
 
   <body>
@@ -24,33 +37,15 @@
     <strong id="title-letter">F</strong>itBuzz!
     </div>
     <ul class="nav nav-tabs">
-      <li role="presentation" class="active"><a href="index.html">Sleep Schedule</a></li>
-      <li role="presentation"><a href="analytics.html">Analytics</a></li>
+      <li role="presentation" class="{{showScheduler ? 'active' : ''}}"><a href="#" ng-click="showScheduler = true">Sleep Schedule</a></li>
+      <li role="presentation" class="{{!showScheduler ? 'active' : ''}}"><a href="#" ng-click="showScheduler = false">Analytics</a></li>
     </ul>
     <div id="container">
       <div id="personal-greeting">
         <strong>Hello, {{ yourName }}!</strong>
       </div>
-
-      Select your sleep schedule:
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          {{currentSchedule}}
-          <span class="caret"></span>
-        </button>
-
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-          <li ng-repeat="schedule in schedules" > <a ng-click="selectSchedule(schedule)">{{schedule}}</a></li>
-        </ul>
-      </div>
-      <div class="start-time">
-        Select start time:
-        <input type="text" id="timepicker1" class="timepicker" name="time" ng-model="initalTime"/>
-      </div>
-      <h2>{{currentSchedule}}</h2>
-      <div class="timeline-container">
-        <div id="timeline"></div>
-      </div>
+      <div ng-show="showScheduler"><scheduler-picker/></div>
+      <div ng-show="!showScheduler"><plot-generator/></div>
     </div>
   </body>
 </html>

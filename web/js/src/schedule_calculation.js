@@ -84,3 +84,49 @@ function calculateUbermanSleepSchedule (startTime, days) {
     }
     return times;
 }
+
+/*
+Returns array of sleep times given a sleep schedule
+*/
+function sleepScheduleTimes(startTime, schedule) {
+    var scheduleData = [];
+    switch (schedule) {
+        case "Uberman":
+            scheduleData = calculateUbermanSleepSchedule(startTime);
+            break;
+        case "Everyman":
+            scheduleData = calculateEverymanSleepSchedule(startTime);
+            break;
+        case "Normal":
+            // TODO(ginellegaisano): add Normal schedule
+            break;
+        case "Custom":
+            // Do nothing
+            break;
+        default:
+        scheduleData = null;
+            // Do nothing
+    }
+    return scheduleData;
+}
+
+/*
+Returns vis timeline options configurations
+*/
+function createVisOptions(startTime, endTime) {
+    return {min: startTime,
+        max: endTime,
+        zoomable: false,
+        showCurrentTime: false,
+        autoResize: false,
+        format: {
+              minorLabels: {
+                minute: 'h:mm a',
+                hour: 'h:mm a',
+              },
+              majorLabels: {
+                second: 'D MMMM h:mm a',
+              }
+        },
+    };
+}

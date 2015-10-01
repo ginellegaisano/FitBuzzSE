@@ -1,0 +1,36 @@
+.axis path,
+.axis line {
+  fill: none;
+  shape-rendering: crispEdges;
+  stroke: #000;
+}
+
+.datepicker-container {
+    background-color: #4C5363;
+    color: white;
+    font-size: 14px;
+    left: 0;
+    padding: 10px 10px 10px 10px;
+    top: 0;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.plot-title {
+    font-size: 20px;
+    padding: 20px 20px 20px 20px;
+}
+
+.x.axis path {
+  display: none;
+}
+
+#datepicker {
+    color: #4C5363;
+}

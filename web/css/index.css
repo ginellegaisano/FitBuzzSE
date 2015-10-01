@@ -12,50 +12,23 @@ a {
 }
 
 /* classes */
+
 .dropdown {
     display: inline;
     margin-right: 24px;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+/* ids */
+#colorF {
+    color: #FFB300;
 }
 
-.x.axis path {
-  display: none;
+#container {
+    margin: 0 24px;
 }
 
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-
-.plot-title {
-    font-size: 20px;
-    padding: 20px 20px 20px 20px;
-}
-
-.datepicker-container {
-    background-color: #4C5363;
-    color: white;
-    font-size: 14px;
-    left: 0;
-    padding: 10px 10px 10px 10px;
-    top: 0;
-    width: 100%;
-    border-radius: 10px;
-}
-
-#datepicker {
-    color: #4C5363;
-}
-
-.timeline-container {
-    width: 750px;
+#personal-greeting {
+    margin: 8px 0;
 }
 
 #title-bar {
@@ -71,21 +44,4 @@ a {
 #title-letter {
     color: #FFB300;
     font-size: 42px;
-}
-
-.start-time {
-    margin:12px 0;
-}
-
-/* ids */
-#colorF {
-    color: #FFB300;
-}
-
-#container {
-    margin: 0 24px;
-}
-
-#personal-greeting {
-    margin: 8px 0;
 }
