@@ -1,0 +1,6 @@
+[submodule "web/packages/d3-timeline"]
+	path = web/packages/d3-timeline
+	url = https://github.com/jiahuang/d3-timeline.git
+[submodule "web/packages/timepicker"]
+	path = web/packages/timepicker
+	url = https://github.com/wvega/timepicker.git
