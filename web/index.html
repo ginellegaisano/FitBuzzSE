@@ -43,22 +43,13 @@
           <li ng-repeat="schedule in schedules" > <a ng-click="selectSchedule(schedule)">{{schedule}}</a></li>
         </ul>
       </div>
-      <div id="next-button">
-        <a id="next-button-inner" href="#" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-arrow-right"></span>
-        </a>
-      </div>
-      <h2>{{currentSchedule}}</h2>
-      <div class="timeline-container">
-        <div id="timeline1"></div>
-      </div>
-
       <div class="start-time">
         Select start time:
         <input type="text" id="timepicker1" class="timepicker" name="time" ng-model="initalTime"/>
       </div>
+      <h2>{{currentSchedule}}</h2>
       <div class="timeline-container">
-        <div id="timeline2"></div>
+        <div id="timeline"></div>
       </div>
     </div>
   </body>

@@ -28,6 +28,24 @@ function sleepScheduleTimes(startTime, schedule) {
     return scheduleData;
 }
 
+function createOptions(startTime, endTime) {
+    return {min: startTime,
+        max: endTime,
+        zoomable: false,
+        showCurrentTime: false,
+        autoResize: false,
+        format: {
+              minorLabels: {
+                minute: 'h:mm a',
+                hour: 'h:mm a',
+              },
+              majorLabels: {
+                second: 'D MMMM h:mm a',
+              }
+        },
+    };
+}
+
 app.run(function($rootScope) {
     $rootScope.yourName = "Ginelle Gaisano";
     $rootScope.schedules = ["Uberman", "Everyman", "Normal", "Custom"];
@@ -46,18 +64,15 @@ app.run(function($rootScope) {
     var items = new vis.DataSet(times);
 
     // Configuration for the Timeline
-    var options = {min: startTime,
-        max: endTime,
-        zoomable: false,
-        showCurrentTime: false,
-    };
+    var options = createOptions(startTime, endTime)
 
     // Create a Timeline
-    var timeline1 = new vis.Timeline(document.getElementById('timeline1'), items, options);
-    var timeline2 = new vis.Timeline(document.getElementById('timeline2'), items, options);
+    var timeline = new vis.Timeline(document.getElementById('timeline'), items, options);
 
     $('input.timepicker').timepicker({
+        dynamic: 0,
         startHour: 0,
+        timeFormat: 'h:mm p',
         change: function(time) {
             var dateTime = new Date(time);
             var customStartTime = startTime + convertTimeToMilliseconds(dateTime.getHours(), TimeEnum.HOURS)
@@ -67,14 +82,12 @@ app.run(function($rootScope) {
                 console.log("invalid schedule.");
                 return;
             }
-            var options = {min: customStartTime,
-                max: customStartTime + convertTimeToMilliseconds(23, TimeEnum.HOURS),
-                zoomable: false,
-                showCurrentTime: false,
-                start: customStartTime,
-                };
-            timeline2.setItems(scheduleTimes);
-            timeline2.setOptions(options);
+            var options = createOptions (
+                startTime,
+                customStartTime + convertTimeToMilliseconds(24, TimeEnum.HOURS));
+            timeline.setItems(scheduleTimes);
+            timeline.setOptions(options);
+            timeline.fit();
 
         },
       });
@@ -87,6 +100,5 @@ app.run(function($rootScope) {
         }
         $rootScope.currentSchedule = schedule;
         $("input.timepicker").change();
-        timeline1.setItems(scheduleTimes);
     };
 });
