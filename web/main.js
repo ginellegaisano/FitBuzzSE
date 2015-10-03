@@ -7,6 +7,20 @@
 var app = angular.module('fitBuzz', ['schedulePickerModule', 'plotGeneratorModule']);
 
 app.controller('FitBuzzController', ['$scope', function($scope) {
-    $scope.yourName = "Ginelle Gaisano";
+    $scope.username = "Ginelle Gaisano";
     $scope.showScheduler = true;
+    $scope.signedIn = false;
+
+    $scope.signIn = function() {
+        $scope.signedIn = true;
+        setTimeout(function () {
+            $("#overlay").css("display", "none");
+        }, 2000);
+    }
+
+    $("#username-input").keyup(function(event){
+        if(event.keyCode == 13){
+        $("#signin-button").click();
+    }
+});
 }]);

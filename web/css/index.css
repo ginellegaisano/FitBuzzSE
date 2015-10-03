@@ -18,6 +18,34 @@ a {
     margin-right: 24px;
 }
 
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.overlay {
+    background-color: #4C5363;
+    color: white;
+    font-size: 3em;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+#overlay {
+    animation: pulse 2s;
+    opacity: 0;
+}
+
 /* ids */
 #colorF {
     color: #FFB300;
@@ -31,10 +59,21 @@ a {
     margin: 8px 0;
 }
 
+#overlay-container {
+    display: inline-block;
+    margin: 15% 30%;
+    width: 40%;
+}
+
+#username-input {
+    color: black;
+    width: 100%;
+}
+
 #title-bar {
     background-color: #4C5363;
     color: white;
-    font-size: 24px;
+    font-size: 1.75em;
     left: 0;
     padding: 24px 0 24px 24px;
     top: 0;
@@ -43,5 +82,5 @@ a {
 
 #title-letter {
     color: #FFB300;
-    font-size: 42px;
+    font-size: 1.5em;
 }

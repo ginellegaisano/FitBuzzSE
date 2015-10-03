@@ -32,20 +32,34 @@
   </head>
 
   <body>
-    <div id="title-bar">
-    <!-- TODO(ginellegaisano): swap out with logo -->
-    <strong id="title-letter">F</strong>itBuzz!
-    </div>
-    <ul class="nav nav-tabs">
-      <li role="presentation" class="{{showScheduler ? 'active' : ''}}"><a href="#" ng-click="showScheduler = true">Sleep Schedule</a></li>
-      <li role="presentation" class="{{!showScheduler ? 'active' : ''}}"><a href="#" ng-click="showScheduler = false">Analytics</a></li>
-    </ul>
-    <div id="container">
-      <div id="personal-greeting">
-        <strong>Hello, {{ yourName }}!</strong>
+    <div class="overlay" id="{{!signedIn ? '' : 'overlay'}}">
+      <div id="overlay-container">
+        <div>
+          <strong id="title-letter">F</strong>itBuzz!
+        </div>
+        <input id="username-input" type="text" ng-model="username"/>
+        <button id="signin-button" ng-click="signIn()" type="button" class="btn btn-default" aria-label="Left Align">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+        </button>
       </div>
-      <div ng-show="showScheduler"><scheduler-picker/></div>
-      <div ng-show="!showScheduler"><plot-generator/></div>
     </div>
+    <div ng-show="signedIn">
+      <div id="title-bar">
+      <!-- TODO(ginellegaisano): swap out with logo -->
+      <strong id="title-letter">F</strong>itBuzz!
+      </div>
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="{{showScheduler ? 'active' : ''}}"><a href="#" ng-click="showScheduler = true">Sleep Schedule</a></li>
+        <li role="presentation" class="{{!showScheduler ? 'active' : ''}}"><a href="#" ng-click="showScheduler = false">Analytics</a></li>
+      </ul>
+      <div id="container">
+        <div id="personal-greeting">
+          <strong>Hello, {{ username }}!</strong>
+        </div>
+        <div ng-show="showScheduler"><scheduler-picker/></div>
+        <div ng-show="!showScheduler"><plot-generator/></div>
+      </div>
+    </div>
+
   </body>
 </html>
