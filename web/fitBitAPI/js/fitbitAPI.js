@@ -11,7 +11,7 @@ function setup(){
     var encoded_user_name = "MjI5VzZLOmU0MWU0NWU5MGE0YzUzZTEyNDc0NzljOWUwNzM4N2Fm="
     var refresh_token = "f90a3482e393666e631f0110fee382ac576703cfae08dcf8b8d934e03253626c";
     var access_token;
-    var redirect_url = "http%3A%2F%2Flocalhost%3A63342%2FFitBuzzSE%2Fweb%2FfitBitAPI%2Fmain.html";
+    var redirect_url = "http%3A%2F%2Flocalhost%3A63342";
     var tracking_id;
     var devices_ret_data;
     var alarm_ret_data;
@@ -68,8 +68,9 @@ function setup(){
             type= "GET";
             authorization = "Bearer " + access_token;
             onSuccess= function(data){
-                //console.log("getting Devices");
+                console.log("getting Devices");
                 device_ret_data = data;
+                console.log(device_ret_data);
                 tracking_id = data[0].id;
 
             }
@@ -91,10 +92,12 @@ function setup(){
             type= "GET";
             authorization = "Bearer " + access_token;
             onSuccess= function(data){
+                console.log("got alarms");
                 alarm_ret_data = data.trackerAlarms;
                 if(data.trackerAlarms.length < 1){
                     has_alarms = false;
                 }
+                console.log(data.trackerAlarms);
             }
             onError= function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR)
@@ -107,7 +110,7 @@ function setup(){
 
         }
         setSleepTime =  function(date){
-            $.getJSON("js/mockSleep.json", function(data) {
+            $.getJSON("fitbitapi/js/mockSleep.json", function(data) {
                 $.each(data, function(idx, obj){
                     sleep_ret_data.push(obj);
                 });
@@ -130,7 +133,7 @@ function setup(){
 
         //has to be in yyyy-MM-dd time. to current
         setHeartTime= function(date, period){
-            $.getJSON("js/mockHeart.json", function(data){
+            $.getJSON("fitbitapi/js/mockHeart.json", function(data){
                 $.each(data, function(idx, obj){
                     heart_ret_data.push(obj);
                 });
@@ -155,13 +158,15 @@ function setup(){
 
         getAccessCode :  function(callback){
             code = window.location.search.substring(6)
-            data = "client_id=229W6K&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A63342%2FFitBuzzSE%2Fweb%2FfitBitAPI%2Fmain.html&code="+ code;
+            data = "client_id=229W6K&grant_type=authorization_code&redirect_uri=http%3A%2F%2Flocalhost%3A63342&code="+ code;
             url= "https://api.fitbit.com/oauth2/token"
             type= "POST"
             data= data
             authorization =  "Basic MjI5VzZLOmU0MWU0NWU5MGE0YzUzZTEyNDc0NzljOWUwNzM4N2Fm="
             success= function (data) {
+                console.log("successfully got the code.")
                 access_token = data.access_token;
+                console.log(data.access_token);
                 return true;
             }
             error= function (jqXHR, textStatus, errorThrown) {
@@ -219,7 +224,7 @@ function setup(){
             return alarm_ret_data;
         },
 
-        getDevices: function(){
+        getDevice: function(){
             return devices_ret_data;
         },
 
