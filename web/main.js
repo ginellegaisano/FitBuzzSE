@@ -16,6 +16,7 @@ app.controller('FitBuzzController', ['$scope', function($scope) {
         setTimeout(function () {
             $("#overlay").css("display", "none");
         }, 2000);
+        $("input.timepicker").change();
     }
 
     $("#username-input").keyup(function(event){

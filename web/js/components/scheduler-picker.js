@@ -12,7 +12,6 @@ Sleep Scheduler Picker Module:
         - Implement Normal and Custom sleep schedules
         - Send sleep schedule to FitBit
 */
-
 var schedulePickerModule = angular.module('schedulePickerModule', []);
 
 schedulePickerModule.directive('schedulerPicker', function() {
@@ -30,12 +29,11 @@ schedulePickerModule.controller('SchedulerPickerController', ['$scope', function
 
     var d = Date.now();
     var startTime = (new Date()).setHours(0,0,0,0);
-    var endTime = (new Date()).setHours(24,0,0,0);
-    var times = calculateUbermanSleepSchedule(startTime);
+    var endTime = startTime + convertTimeToMilliseconds(24, TimeEnum.HOURS);
+    var times = sleepScheduleTimes(startTime, $scope.currentSchedule);
 
-    var items = new vis.DataSet(times);
     var options = createVisOptions(startTime, endTime);
-    var timeline = new vis.Timeline(document.getElementById('timeline'), items, options);
+    var timeline = new vis.Timeline(document.getElementById('timeline'));
 
     $('input.timepicker').timepicker({
         dynamic: 0,
@@ -45,15 +43,16 @@ schedulePickerModule.controller('SchedulerPickerController', ['$scope', function
             var dateTime = new Date(time);
             var customStartTime = startTime + convertTimeToMilliseconds(dateTime.getHours(), TimeEnum.HOURS)
                 + convertTimeToMilliseconds(dateTime.getMinutes(), TimeEnum.MINUTES);
-            var scheduleTimes = sleepScheduleTimes(customStartTime, $scope.currentSchedule);
-            if (scheduleTimes == null) {
+            times = sleepScheduleTimes(customStartTime, $scope.currentSchedule);
+            if (times == null) {
                 console.log("invalid schedule.");
                 return;
             }
-            var options = createVisOptions (
+            var options = createVisOptions(
                 startTime,
-                customStartTime + convertTimeToMilliseconds(24, TimeEnum.HOURS));
-            timeline.setItems(scheduleTimes);
+                customStartTime + convertTimeToMilliseconds(24, TimeEnum.HOURS)
+            );
+            timeline.setItems(times);
             timeline.setOptions(options);
             timeline.fit();
 
@@ -61,12 +60,35 @@ schedulePickerModule.controller('SchedulerPickerController', ['$scope', function
       });
 
     $scope.selectSchedule = function(schedule) {
-        var scheduleTimes = sleepScheduleTimes(startTime, schedule);
-        if (scheduleTimes == null) {
+        times = sleepScheduleTimes(startTime, schedule);
+        if (times == null) {
             console.log("invalid schedule.");
             return;
         }
         $scope.currentSchedule = schedule;
         $("input.timepicker").change();
     };
+
+    $scope.sendAlarms = function() {
+        console.log(times);
+        _.each(times, function(time){
+            var startDate = new Date(time["start"]);
+            var endDate = new Date(time["end"]);
+            var startAlarm = formatTime(startDate.getHours(), startDate.getMinutes());
+            var endAlarm = formatTime(endDate.getHours(), endDate.getMinutes());
+            var startDay = DAYS[startDate.getDay()].toUpperCase();
+            var endDay = DAYS[endDate.getDay()].toUpperCase();
+            console.log(startAlarm + " " + startDay);
+            console.log(endAlarm + " " + endDay);
+            // uncomment when want to test alarms
+            // fitbitAPI.setAlarm(startAlarm, startDay);
+            // fitbitAPI.setAlarm(endAlarm, endDay);
+        });
+    }
+
+    $scope.clearAlarms = function() {
+        // TODO(ginellegaisano): hook up clear alarms when API is created
+        console.log("Oops! No call implemented.");
+    }
+
 }]);

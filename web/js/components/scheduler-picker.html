@@ -13,9 +13,14 @@
   <div class="start-time">
     Select start time:
     <input type="text" id="timepicker1" class="timepicker" name="time" ng-model="initalTime"/>
+    <button id="set-schedule" type="button" class="btn btn-default" ng-click="sendAlarms()">Set Schedule</button>
+    <button id="set-schedule" type="button" class="btn btn-default" ng-click="clearAlarms()">Clear Schedule</button>
   </div>
+  <!-- fitbitAPI/js/fitbit.js to see how to use-->
+  <button id="setAlarm" type="button" class="btn btn-default">Test FitBit Alarm</button>
   <h2>{{currentSchedule}}</h2>
   <div class="timeline-container">
     <div id="timeline"></div>
   </div>
+
 </div>

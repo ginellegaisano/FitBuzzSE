@@ -28,3 +28,13 @@ function convertTimeToMilliseconds (time, convertToType) {
             break;
     }
 }
+
+function padZeroes(num, length) {
+    var str = num.toString();
+    while (str.length < length) str = "0" + str;
+    return str;
+}
+
+function formatTime(hours, minutes) {
+    return padZeroes(hours, 2) + ":" + padZeroes(minutes, 2);
+}
