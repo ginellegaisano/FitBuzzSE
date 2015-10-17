@@ -35,11 +35,24 @@ function getHeartRates() {
   return data;
 }
 
-function generateHeartRatePlot() {
+function displayDatepicker() {
   $( "#datepicker" ).datepicker({
       changeMonth: true,//this option for allowing user to select month
       changeYear: true //this option for allowing user to select from year range
     });
+
+  var d = new Date();
+  var month = d.getMonth()+1;
+  var day = d.getDate();
+
+  var today = (month<10 ? '0' : '') + month + '/' +
+    (day<10 ? '0' : '') + day + '/' +
+    d.getFullYear();
+
+  $( "#datepicker" ).val(today);
+}
+
+function generateHeartRatePlot() {
   var margin = {top: 20, right: 20, bottom: 100, left: 50},
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -70,14 +83,16 @@ function generateHeartRatePlot() {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  data = getHeartRates();
+  fitbitAPI.setHeartRateLogTimeFrame("today", "1d");
+  data = fitbitAPI.getHeartLogs();
+  console.log(data);
   data.forEach(function(d) {
     d.datetime = parseDate(d.datetime);
     d.close = +d.close;
   });
 
-  x.domain(d3.extent(data, function(d) { return d.datetime; }));
-  y.domain(d3.extent(data, function(d) { return d.close; }));
+  x.domain(d3.extent(data, function(d) { return d.time; }));
+  y.domain(d3.extent(data, function(d) { return d.value; }));
 
   svg.append("g")
       .attr("class", "x axis")
@@ -234,7 +249,8 @@ plotGeneratorModule.directive('plotGenerator', function() {
 });
 
 plotGeneratorModule.controller('plotGeneratorController', ['$scope', function($scope) {
-   generateHeartRatePlot();
-   generateSleepPlot();
+  displayDatepicker();
+  generateHeartRatePlot();
+  generateSleepPlot();
 }]);
 

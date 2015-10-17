@@ -133,7 +133,7 @@ function setup(){
 
         //has to be in yyyy-MM-dd time. to current
         setHeartTime= function(date, period){
-            $.getJSON("fitbitapi/js/mockHeart.json", function(data){
+            $.getJSON("fitBitAPI/js/mockHeart.json", function(data){
                 $.each(data, function(idx, obj){
                     heart_ret_data.push(obj);
                 });

@@ -16,6 +16,11 @@
     border-radius: 10px;
 }
 
+#datepicker {
+  border-radius: 5px;
+  padding: 0 5px 0 5px;
+}
+
 .line {
   fill: none;
   stroke: steelblue;

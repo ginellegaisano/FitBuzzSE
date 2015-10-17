@@ -28,6 +28,7 @@ $("#getHeart").click(function(){
 var setup = setup();
 var fitbitAPI = new setup.fitbitAPI();
 
+/*
 $(document).ready(function(){
     console.log("document ready")
     fitbitAPI.getAccessCode(function(data){
@@ -44,4 +45,4 @@ $(document).ready(function(){
     //TODO: add some sort of server to perform data analytics.
     //if(test)
 })
-
+*/
