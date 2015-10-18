@@ -1,3 +1,8 @@
+label {
+  margin-top: 50px;
+  width: 500px;
+}
+
 .axis path,
 .axis line {
   fill: none;
@@ -8,17 +13,19 @@
 .datepicker-container {
     background-color: #4C5363;
     color: white;
-    font-size: 14px;
+    font-size: 15px;
     left: 0;
-    padding: 10px 10px 10px 10px;
+    padding: 13px 10px 10px 10px;
     top: 0;
     width: 100%;
     border-radius: 10px;
+    height: 60px;
 }
 
 #datepicker {
   border-radius: 5px;
   padding: 0 5px 0 5px;
+  height: 34px;
 }
 
 .line {

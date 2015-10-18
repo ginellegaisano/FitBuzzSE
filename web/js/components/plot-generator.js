@@ -6,33 +6,46 @@ Plot Generator Module:
 */
 
 function getHeartRates() {
-  var data = [
-    {datetime: "0:00", close: 65},
-    {datetime: "1:00", close: 66},
-    {datetime: "2:00", close: 64},
-    {datetime: "3:00", close: 68},
-    {datetime: "4:00", close: 80},
-    {datetime: "5:00", close: 82},
-    {datetime: "6:00", close: 61},
-    {datetime: "7:00", close: 65},
-    {datetime: "8:00", close: 64},
-    {datetime: "9:00", close: 65},
-    {datetime: "10:00", close: 60},
-    {datetime: "11:00", close: 64},
-    {datetime: "12:00", close: 66},
-    {datetime: "13:00", close: 65},
-    {datetime: "14:00", close: 64},
-    {datetime: "15:00", close: 65},
-    {datetime: "16:00", close: 67},
-    {datetime: "17:00", close: 54},
-    {datetime: "18:00", close: 55},
-    {datetime: "19:00", close: 54},
-    {datetime: "20:00", close: 53},
-    {datetime: "21:00", close: 55},
-    {datetime: "22:00", close: 65},
-    {datetime: "23:00", close: 66}
-  ];
+  var times = ["0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00",
+  "8:00", "9:00", "10:00","11:00","12:00","13:00", "14:00", "15:00", "16:00",
+  "17:00", "18:00", "19:00", "20:00", "21:00", "22:00","23:00" ];
+  var data = [];
+  for (var i = 0; i < times.length; i++) {
+    var onePoint = {datetime: times[i], close: Math.floor(Math.random() * (80-70)) + 71};
+    data.push(onePoint);
+  }
   return data;
+}
+
+function getSleepTimes() {
+  var sleepData = [];
+  var times = ["0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00",
+  "8:00", "9:00", "10:00","11:00","12:00","13:00", "14:00", "15:00", "16:00",
+  "17:00", "18:00", "19:00", "20:00", "21:00", "22:00","23:00" ];
+  var data = [];
+  for (var i = 0; i < times.length; i++) {
+    var currPoint;
+    if (i % 4 != 0) {
+      currPoint = {
+        Hour: times[i],
+        MinutesToFallAsleep: 0,
+        MinutesAsleep: 0,
+        MinutesAwake: 0,
+        MinutesAfterWakeup: 0
+      }
+    } else {
+       currPoint = {
+        Hour: times[i],
+        MinutesToFallAsleep: Math.floor(Math.random() * (25-5)) + 6,
+        MinutesAsleep: Math.floor(Math.random() * (25-20)) + 21,
+        MinutesAwake: Math.floor(Math.random() * (5-1)) + 2,
+        MinutesAfterWakeup: Math.floor(Math.random() * (3-1)) + 1
+      };
+    }
+    sleepData.push(currPoint);
+  }
+  
+  return sleepData;
 }
 
 function displayDatepicker() {
@@ -53,11 +66,12 @@ function displayDatepicker() {
 }
 
 function generateHeartRatePlot() {
+  var parseDate = d3.time.format("%H:%M").parse;
+  var data = getHeartRates();
+
   var margin = {top: 20, right: 20, bottom: 100, left: 50},
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
-
-  var parseDate = d3.time.format("%H:%M").parse;
 
   var x = d3.time.scale()
       .range([0, width]);
@@ -67,6 +81,7 @@ function generateHeartRatePlot() {
 
   var xAxis = d3.svg.axis()
       .scale(x)
+      .tickFormat(d3.time.format("%I %p"))
       .orient("bottom");
 
   var yAxis = d3.svg.axis()
@@ -83,16 +98,13 @@ function generateHeartRatePlot() {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  fitbitAPI.setHeartRateLogTimeFrame("today", "1d");
-  data = fitbitAPI.getHeartLogs();
-  console.log(data);
   data.forEach(function(d) {
     d.datetime = parseDate(d.datetime);
     d.close = +d.close;
   });
 
-  x.domain(d3.extent(data, function(d) { return d.time; }));
-  y.domain(d3.extent(data, function(d) { return d.value; }));
+  x.domain(d3.extent(data, function(d) { return d.datetime; }));
+  y.domain(d3.extent(data, function(d) { return d.close; }));
 
   svg.append("g")
       .attr("class", "x axis")
@@ -124,29 +136,13 @@ function generateHeartRatePlot() {
       .attr("d", line);
 }
 
-function getSleepTimes() {
-  var data = [
-    {Hour: 1, minutesToFallAsleep: 30, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5},
-    {Hour: 2, minutesToFallAsleep: 28, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5},
-    {Hour: 3, minutesToFallAsleep: 25, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5},
-    {Hour: 4, minutesToFallAsleep: 22, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5},
-    {Hour: 5, minutesToFallAsleep: 15, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5},
-    {Hour: 6, minutesToFallAsleep: 10, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5},
-    {Hour: 7, minutesToFallAsleep: 5, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5},
-    {Hour: 8, minutesToFallAsleep: 3, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5},
-    {Hour: 9, minutesToFallAsleep: 2, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5},
-    {Hour: 10, minutesToFallAsleep: 1, minutesAsleep: 20, minutesAwake: 5, minutesAfterWakeup: 5}
-  ];
-  return data;
-}
-
 function generateSleepPlot() {
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
-      width = 500 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+      width = 600 - margin.left - margin.right,
+      height = 450 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
-      .rangeRoundBands([0, width], .1);
+      .rangeRoundBands([0, width - 100], .1);
 
   var y = d3.scale.linear()
       .rangeRound([height, 0]);
@@ -165,7 +161,7 @@ function generateSleepPlot() {
 
   var svg = d3.select("#sleeptime-graph").append("svg")
       .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("height", height + 50 + margin.top + margin.bottom)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -179,7 +175,7 @@ function generateSleepPlot() {
     d.total = d.sleepInterval[d.sleepInterval.length - 1].y1;
   });
 
-  data.sort(function(a, b) { return b.total - a.total; });
+  //data.sort(function(a, b) { return b.total - a.total; });
 
   x.domain(data.map(function(d) { return d.Hour; }));
   y.domain([0, d3.max(data, function(d) { return d.total; })]);
@@ -189,7 +185,11 @@ function generateSleepPlot() {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
       .selectAll("text")
-        .style("font-size","13px");
+        .style("text-anchor", "end")
+        .style("font-size","13px")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)" );
 
   svg.append("g")
       .attr("class", "y axis")
@@ -235,7 +235,8 @@ function generateSleepPlot() {
       .attr("y", 9)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
-      .text(function(d) { return d; });
+      .style("font-size","13px")
+      .text(function(d) { return d.replace(/([a-z])([A-Z])/g, '$1 $2'); });
 }
 
 var plotGeneratorModule = angular.module('plotGeneratorModule', []);
@@ -249,6 +250,12 @@ plotGeneratorModule.directive('plotGenerator', function() {
 });
 
 plotGeneratorModule.controller('plotGeneratorController', ['$scope', function($scope) {
+  $scope.refreshPlots = function() {
+    $( "#heartrate-graph" ).empty();
+    $( "#sleeptime-graph" ).empty();
+     generateHeartRatePlot();  
+     generateSleepPlot();
+  }
   displayDatepicker();
   generateHeartRatePlot();
   generateSleepPlot();

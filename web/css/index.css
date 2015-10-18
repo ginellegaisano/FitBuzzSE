@@ -66,8 +66,10 @@ a {
 }
 
 #username-input {
-    color: black;
+    color: #1B2839;
     width: 100%;
+    padding: 0 5px 0 5px;
+    border-radius: 5px;
 }
 
 #title-bar {

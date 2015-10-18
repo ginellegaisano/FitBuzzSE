@@ -1,5 +1,12 @@
 <div ng-controller="plotGeneratorController" class="plot-title">
-  <div class="datepicker-container">View Metrics for Date <input type="text" id="datepicker"/></div>
+  <div class="datepicker-container">
+  	View Metrics for Date 
+  	<input type="text" id="datepicker"/>
+  	<button id="generate-button" ng-click="refreshPlots()" type="button" class="btn btn-default" aria-label="Left Align">
+	  <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+	</button>
+  </div>
+  <div id="graph-header"><label>Heart Rate Graph</label><label>Sleep Time Graph</label></div>
   <div id="heartrate-graph"></div>
   <div id="sleeptime-graph"></div>
 </div>
